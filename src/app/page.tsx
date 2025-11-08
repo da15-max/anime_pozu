@@ -198,13 +198,13 @@ const HomePage = () => {
             {/* その他のTIPS項目 */}
             <Link href="/tips/locations" className="p-2 border border-gray-600 bg-slate-700 rounded-lg text-center shadow-sm hover:border-sky-500 transition block">
               <div className="text-sm font-bold mb-1">ロケ地情報</div>
-              <img src="/tips/map.png" alt="ロケ地アイコン" className="w-16 h-16 mx-auto object-contain" />
+              <Image src="/tips/map.png" alt="ロケ地アイコン" width={64} height={64} className="w-16 h-16 mx-auto object-contain" />
               <div className="text-xs text-gray-400 mt-2">異国のタジンクロニクル</div>
             </Link>
 
             <Link href="/tips/gear" className="p-2 border border-gray-600 bg-slate-700 rounded-lg text-center shadow-sm hover:border-sky-500 transition block">
               <div className="text-sm font-bold mb-1">カメラ機材</div>
-              <img src="/tips/camera.png" alt="カメラアイコン" className="w-16 h-16 mx-auto object-contain" />
+              <Image src="/tips/camera.png" alt="カメラアイコン" width={64} height={64} className="w-16 h-16 mx-auto object-contain" />
               <div className="text-xs text-gray-400 mt-2">機材の選び方と使い方</div>
             </Link>
             

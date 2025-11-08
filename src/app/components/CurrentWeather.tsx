@@ -2,6 +2,7 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
+import Image from 'next/image';
 
 // 天気APIから返されるデータの型
 interface WeatherData {
@@ -100,11 +101,13 @@ if (loading) {
       <div className="text-sm font-bold text-sky-300 mb-1">現在の天気</div>
       
       {/* 天気アイコンと気温 */}
-      <img 
+      <Image 
         src={iconUrl} 
         alt={weather.description} 
+        width={64}
+        height={64}
         className="w-16 h-16 mx-auto object-contain" 
-        style={{ marginTop: '-4px', marginBottom: '-4px' }} // アイコンを中央に寄せるための微調整
+        style={{ marginTop: '-4px', marginBottom: '-4px' }}
       />
       
       <div className="text-2xl font-extrabold text-white">

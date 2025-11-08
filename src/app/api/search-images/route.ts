@@ -64,34 +64,38 @@ export async function GET(request: Request) {
     }
 
     const data1 = await response1.json();
-    // const data2 = await response2.json();
-    // const data3 = await response3.json();
 
-    const items1 = (data1.items && data1.items.length > 0) ? data1.items : [];
+    const items1: GoogleImageItem[] = Array.isArray(data1.items) ? data1.items : [];
     // const items2 = (data2.items && data2.items.length > 0) ? data2.items : [];
     // const items3 = (data3.items && data3.items.length > 0) ? data3.items : [];
 
-    const allItems = [...items1, ];
+    const allItems: GoogleImageItem[] = [...items1];
     //...items2, ...items3
     if (allItems.length === 0) {
       return NextResponse.json([]); 
     }
     
-    const images = allItems
-      .map((item: any) => {
-        if (item && item.link && item.title && item.snippet && item.image && item.image.contextLink) {
-          return {
-            id: item.cacheId || item.link,
-            title: item.title,
-            imageUrl: item.link, 
-            thumbnailUrl: item.image.thumbnailLink, 
-            pageUrl: item.image.contextLink, 
-            snippet: item.snippet,
-          };
+    const images: PoseImageResult[] = allItems
+      .map((item) => {
+        if (!item?.link || !item.title || !item.snippet) {
+          return null;
         }
-        return null;
+
+        const { thumbnailLink, contextLink } = item.image ?? {};
+        if (!thumbnailLink || !contextLink) {
+          return null;
+        }
+
+        return {
+          id: item.cacheId ?? item.link,
+          title: item.title,
+          imageUrl: item.link,
+          thumbnailUrl: thumbnailLink,
+          pageUrl: contextLink,
+          snippet: item.snippet,
+        };
       })
-      .filter(Boolean);
+      .filter((item): item is PoseImageResult => item !== null);
 
     return NextResponse.json(images);
 
@@ -102,4 +106,24 @@ export async function GET(request: Request) {
       { status: 500 }
     );
   }
+}
+
+interface GoogleImageItem {
+  cacheId?: string;
+  link?: string;
+  title?: string;
+  snippet?: string;
+  image?: {
+    thumbnailLink?: string;
+    contextLink?: string;
+  };
+}
+
+interface PoseImageResult {
+  id: string;
+  title: string;
+  imageUrl: string;
+  thumbnailUrl: string;
+  pageUrl: string;
+  snippet: string;
 }

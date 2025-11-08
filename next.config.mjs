@@ -17,6 +17,12 @@ const nextConfig = {
         port: '',
         pathname: '/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'openweathermap.org',
+        port: '',
+        pathname: '/img/**',
+      },
       // もし将来的にGoogleの他の画像ドメイン(tbn1, tbn2...)も
       // 許可したい場合は、ワイルドカードが使えます:
       // {

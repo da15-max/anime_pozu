@@ -6,11 +6,6 @@ import { ChatCompletionMessageParam } from 'openai/resources/index.mjs';
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
-const MAX_RETRIES = 3;
-const RETRY_DELAY_MS = 1000;
-
-const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
-
 const isHttpUrl = (value: string) => {
   try {
     const parsed = new URL(value);
