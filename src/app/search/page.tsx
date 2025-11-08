@@ -4,7 +4,7 @@
 
 export const dynamic = 'force-dynamic';
 
-import { useState, useEffect } from 'react';
+import { Suspense, useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -30,7 +30,7 @@ interface PoseAdvice {
   sources: { uri: string, title: string }[]; 
 }
 
-export default function SearchPage() {
+function SearchPageInner() {
   const searchParams = useSearchParams();
   const [images, setImages] = useState<PoseImage[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -229,5 +229,13 @@ export default function SearchPage() {
         </div>
       )}
     </div>
+  );
+}
+
+export default function SearchPage() {
+  return (
+    <Suspense fallback={<div className="container mx-auto px-4 py-8 text-slate-300">検索条件を読み込み中...</div>}>
+      <SearchPageInner />
+    </Suspense>
   );
 }
