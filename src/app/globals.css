@@ -1,0 +1,18 @@
+/* src/app/globals.css */
+
+/* ...元からあるTailwindの@tailwindディレクティブ... */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ▼▼▼ この部分を追記 ▼▼▼ */
+/* Chrome, Safari, Operaでスクロールバーを非表示 */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* IE, Edge, Firefoxでスクロールバーを非表示 */
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
